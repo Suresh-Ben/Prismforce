@@ -10,6 +10,7 @@ const rl = readline.createInterface({
 //Variables
 var input = {};
 var output = {};
+let minMonth = 13;
 let maxMonth = 0;
 let year = "";
 
@@ -29,6 +30,7 @@ var processData = () => {
         const date = new Date(data["startDate"]);
         let month = date.getMonth();
         if (month > maxMonth) maxMonth = month;
+        if (month < minMonth) minMonth = month;
         year = date.getFullYear();
         let amount = data["amount"];
 
@@ -40,6 +42,7 @@ var processData = () => {
         const date = new Date(data["startDate"]);
         let month = date.getMonth();
         if (month > maxMonth) maxMonth = month;
+        if (month < minMonth) minMonth = month;
         year = date.getFullYear();
         let amount = data["amount"];
 
@@ -50,7 +53,7 @@ var processData = () => {
 
 var processOutput = () => {
     let result = { balance: [] };
-    for (let i = 0; i <= maxMonth; i++) {
+    for (let i = minMonth; i <= maxMonth; i++) {
         result["balance"].push({
             amount: output[i] != undefined ? output[i] : 0,
             startDate: year + "-" + (i + 1) + "-01T00:00:00.000Z"
